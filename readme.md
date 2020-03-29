@@ -16,7 +16,7 @@ To install the configuration files do the following:
 ```bash
 cd ~/.config
 rm -r fish fisher fisherman
-git clone https://github.com/malob/config.fish.git fish
+git clone https://github.com/matthewfallshaw/config.fish.git fish
 fisher
 fisher self-update
 ```
