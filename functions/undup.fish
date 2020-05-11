@@ -5,5 +5,7 @@ function undup --description 'Remove duplicates from a list'
       set output $output $i
     end
   end
-  echo $output
+  for item in $output
+    echo $item
+  end
 end

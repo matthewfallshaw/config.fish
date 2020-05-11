@@ -5,6 +5,9 @@ set fish_greeting ''
 ## PATH
 set -gxp PATH ~/bin ~/.luarocks/bin
 
+### Undup PATH
+set -gx PATH (undup $PATH)
+
 ## MANPATH
 # set -gq MANPATH || set -gx MANPATH ''
 # for d in (reverse /usr/local/opt/findutils/libexec/gnuman /usr/local/opt/coreutils/libexec/gnuman /usr/local/MacGPG2/share/man /opt/X11/share/man /usr/local/share/man /usr/local/man /usr/share/man)
