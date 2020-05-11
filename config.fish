@@ -1,13 +1,32 @@
 set -g fish_term24bit 1
+# nohello
 set fish_greeting ''
 
-###########
-# Aliases #
-###########
+## PATH
+set -gxp PATH ~/bin ~/.luarocks/bin
 
-alias cat="bat"
-alias g="git"
+## MANPATH
+# set -gq MANPATH || set -gx MANPATH ''
+# for d in (reverse /usr/local/opt/findutils/libexec/gnuman /usr/local/opt/coreutils/libexec/gnuman /usr/local/MacGPG2/share/man /opt/X11/share/man /usr/local/share/man /usr/local/man /usr/share/man)
+#   if not contains $d $MANPATH
+#     set -gx MANPATH $d $MANPATH
+#   end
+# end
 
+# google-cloud-sdk completion & path
+# for p in /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/{completion.fish.inc,path.fish.inc}
+#   test -e $p; and source $p
+# end
+
+# fisher
+if not functions -q fisher
+  echo "Installing fisher for the first time..." >&2
+  set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
+  curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
+  fisher -c fisher
+end
+
+# nvim
 if test -n "$NVIM_LISTEN_ADDRESS"
   alias nh "nvr -o"
   alias nv "nvr -O"
@@ -76,13 +95,30 @@ set -g fish_pager_color_completion $base0    # color of the completion itself
 set -g fish_pager_color_description $base01  # color of the completion description
 set -g fish_pager_color_progress $base2 --background=$cyan
 
-# overwritten by prompt theme
-# fish_color_cwd, the color of the current working directory in the default prompt
-# fish_color_user, the color of the current username in some fish default prompts
-# fish_color_host, the color of the current host system in some fish default prompts
-
 #########
 # Other #
 #########
 
 set -x EDITOR "nvr --remote-silent"
+set -gx EDITOR 'nvim'
+set -gx SUDO_EDITOR nvim
+
+# pyenv
+# set -x PYENV_ROOT $HOME/.pyenv
+# set -x PATH $PYENV_ROOT/bin $PATH
+# status --is-interactive; and source (pyenv init -|psub)
+# status --is-interactive; and source (pyenv virtualenv-init -|psub)
+
+###########
+# Aliases #
+###########
+
+source ~/.config/fish/aliases.fish
+
+# iTerm integration
+test -e {$HOME}/.iterm2_shell_integration.fish; and source {$HOME}/.iterm2_shell_integration.fish
+
+# Bindings
+bind $argv \cx\ce edit_command_buffer
+
+thefuck --alias | source

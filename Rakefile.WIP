@@ -1,0 +1,14 @@
+CDX_DIRS = {
+  cdd: "~/code",
+  cds: "~/source",
+  cde: "~/eclipse-workspace"
+}
+
+CDX_DIRS.each do |cmd, dir|
+  task "update_#{cmd}" do
+    # write function
+  end
+  task "update_#{cmd}_completion" => "update_#{cmd}" do
+    # write completion
+  end
+end
