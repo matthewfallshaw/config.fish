@@ -1,2 +1,1 @@
-
-complete -x -c gsutil -a '(gcloud_sdk_argcomplete)'
+/Users/matt/source/google-cloud-sdk-fish-completion/completions/gsutil.fish
